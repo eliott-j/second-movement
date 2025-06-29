@@ -40,7 +40,7 @@ typedef enum {
     alarm_setting_idx_beeps
 } alarm_setting_idx_t;
 
-static const char _dow_strings[ALARM_DAY_STATES + 1][2] ={"AL", "MO", "TU", "WE", "TH", "FR", "SA", "SO", "ED", "1t", "MF", "WN"};
+static const char _dow_strings[ALARM_DAY_STATES + 1][2] ={"AL", "MO", "TU", "WE", "TH", "FR", "SA", "SU", "ED", "1t", "MF", "WN"};
 static const uint8_t _blink_idx[ALARM_SETTING_STATES] = {2, 0, 4, 6, 8, 9};
 static const uint8_t _blink_idx2[ALARM_SETTING_STATES] = {3, 1, 5, 7, 8, 9};
 static const watch_buzzer_note_t _buzzer_notes[3] = {BUZZER_NOTE_B6, BUZZER_NOTE_C8, BUZZER_NOTE_A8};
@@ -90,16 +90,24 @@ static void _advanced_alarm_face_draw(alarm_state_t *state, uint8_t subsecond) {
         watch_set_indicator(WATCH_INDICATOR_24H);
     }
 
+
+
     sprintf(buf, set_leading_zero? "%c%c%2d%02d%02d  " : "%c%c%2d%2d%02d  ",
+        // "AL" on top left
         _dow_strings[i][0], _dow_strings[i][1],
+        // Index of the alarm 
         (state->alarm_idx + 1),
+        // Hour
         h,
+        // Minute
         state->alarm[state->alarm_idx].minute);
     // blink items if in settings mode
     if (state->is_setting && subsecond % 2 && state->setting_state < alarm_setting_idx_pitch && !state->alarm_quick_ticks) {
         buf[_blink_idx[state->setting_state]] = buf[_blink_idx2[state->setting_state]] = ' ';
     }
     watch_display_text(WATCH_POSITION_FULL, buf);
+
+
 
     if (state->is_setting) {
     // draw pitch level indicator

@@ -54,7 +54,7 @@ void set_time_face_resign(void *context);
     set_time_face_activate, \
     set_time_face_loop, \
     set_time_face_resign, \
-    NULL, \
+    NULL \
 })
 
 #endif // SET_TIME_FACE_H_

@@ -107,6 +107,10 @@ static void clock_check_battery_periodically(clock_state_t *state, watch_date_ti
 
 static void clock_toggle_time_signal(clock_state_t *state) {
     state->time_signal_enabled = !state->time_signal_enabled;
+    // play the signal tune if the time signal is enabled
+    if (state->time_signal_enabled) {
+        movement_play_signal();
+    }
     clock_indicate_time_signal(state);
 }
 
