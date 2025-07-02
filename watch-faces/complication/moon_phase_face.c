@@ -159,6 +159,7 @@ bool moon_phase_face_loop(movement_event_t event, void *context) {
     switch (event.event_type) {
         case EVENT_ACTIVATE:
             if (watch_sleep_animation_is_running()) watch_stop_sleep_animation();
+            watch_set_indicator(WATCH_INDICATOR_SLEEP);
             _update(state, state->offset);
             break;
         case EVENT_TICK:
@@ -184,8 +185,8 @@ bool moon_phase_face_loop(movement_event_t event, void *context) {
             state->offset += 86400;
             _update(state, state->offset);
             break;
-	case EVENT_ALARM_LONG_PRESS:
-	    state->offset = 0;
+        case EVENT_ALARM_LONG_PRESS:
+            state->offset = 0;
             _update(state, state->offset);
 	    break;
         case EVENT_TIMEOUT:
@@ -200,5 +201,6 @@ bool moon_phase_face_loop(movement_event_t event, void *context) {
 
 void moon_phase_face_resign(void *context) {
     moon_phase_state_t *state = (moon_phase_state_t *)context;
+    watch_clear_indicator(WATCH_INDICATOR_SLEEP);
     state->offset = 0;
 }

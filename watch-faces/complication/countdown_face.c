@@ -111,15 +111,15 @@ static void draw(countdown_state_t *state, uint8_t subsecond) {
             result = div(result.quot, 60);
             state->hours = result.quot;
             state->minutes = result.rem;
-            sprintf(buf, "%2d%02d%02d", state->hours, state->minutes, state->seconds);
+            sprintf(buf, "%02d%02d%02d", state->hours, state->minutes, state->seconds);
             break;
         case cd_reset:
         case cd_paused:
             watch_clear_indicator(WATCH_INDICATOR_SIGNAL);
-            sprintf(buf, "%2d%02d%02d", state->hours, state->minutes, state->seconds);
+            sprintf(buf, "%02d%02d%02d", state->hours, state->minutes, state->seconds);
             break;
         case cd_setting:
-            sprintf(buf, "%2d%02d%02d", state->hours, state->minutes, state->seconds);
+            sprintf(buf, "%02d%02d%02d", state->hours, state->minutes, state->seconds);
             if (!quick_ticks_running && subsecond % 2) {
                 switch(state->selection) {
                     case 0:
@@ -140,11 +140,11 @@ static void draw(countdown_state_t *state, uint8_t subsecond) {
 
     watch_display_text(WATCH_POSITION_BOTTOM, buf);
 
-    if (state->tap_detection_ticks) {
-        watch_set_indicator(WATCH_INDICATOR_SIGNAL);
-    } else {
-        watch_clear_indicator(WATCH_INDICATOR_SIGNAL);
-    }
+    // if (state->tap_detection_ticks) {
+    //     watch_set_indicator(WATCH_INDICATOR_SIGNAL);
+    // } else {
+    //     watch_clear_indicator(WATCH_INDICATOR_SIGNAL);
+    // }
 }
 
 static void pause(countdown_state_t *state) {

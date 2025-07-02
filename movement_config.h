@@ -32,7 +32,7 @@ const watch_face_t watch_faces[] = {
     // world_clock_face,
     fast_stopwatch_face,
     countdown_face,
-    alarm_face,
+    // alarm_face,
     advanced_alarm_face,
     sunrise_sunset_face,
     moon_phase_face,
@@ -54,7 +54,7 @@ const watch_face_t watch_faces[] = {
 /* Custom hourly chime tune. Check movement_custom_signal_tunes.h for options. */
 // #define SIGNAL_TUNE_DEFAULT
 #define SIGNAL_TUNE_ZELDA_SECRET
-// #define SIGNAL_TUNE_HARRY_POTTER_SHORT
+// #define SIGNAL_TUNE_HARRY_POTTER_LONG
 
 /* Determines the intensity of the led colors
  * Set a hex value 0-15 with 0x0 being off and 0xF being max intensity

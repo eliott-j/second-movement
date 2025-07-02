@@ -92,7 +92,7 @@ static void _advanced_alarm_face_draw(alarm_state_t *state, uint8_t subsecond) {
 
 
 
-    sprintf(buf, set_leading_zero? "%c%c%2d%02d%02d  " : "%c%c%2d%2d%02d  ",
+    sprintf(buf, set_leading_zero? "%c%c%c%2d%02d%02d  " : "%c%c%2d%2d%02d  ",
         // "AL" on top left
         _dow_strings[i][0], _dow_strings[i][1],
         // Index of the alarm 
@@ -106,6 +106,10 @@ static void _advanced_alarm_face_draw(alarm_state_t *state, uint8_t subsecond) {
         buf[_blink_idx[state->setting_state]] = buf[_blink_idx2[state->setting_state]] = ' ';
     }
     watch_display_text(WATCH_POSITION_FULL, buf);
+    // when not in settings mode, show "ALM" on top left
+    if (!state->is_setting) {
+        watch_display_text_with_fallback(WATCH_POSITION_TOP_LEFT, "ALM", "AL");
+    }
 
 
 
